@@ -6,40 +6,43 @@ import os
 import re
 from fractions import Fraction
 import json
-import uvicorn
-# Add at the top of your imports
 from dotenv import load_dotenv
-load_dotenv()  # Load environment variables before using them
-
 from fastapi.middleware.cors import CORSMiddleware
 
+# Load environment variables first
+load_dotenv()
+
+# Create FastAPI app once
 app = FastAPI()
 
+# Configure CORS middleware properly
 origins = [
-    "https://shaloled.pythonanywhere.com",  # your frontend domain
+    "https://shaloled.pythonanywhere.com",
+    "https://cerulean-dolphin-50c125.netlify.app",  # Add your Netlify frontend URL
+    "http://localhost:3000",                 # For local development
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # or ["*"] for all (not recommended for production)
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Enable asyncio in Jupyter
-
-# Load environment variables (for Kaggle, use os.environ directly)
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # Replace with your actual key
-
-
+# Gemini configuration
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
 gemini = genai.GenerativeModel("gemini-2.0-flash")
 
-app = FastAPI()
-
 class RecipeRequest(BaseModel):
     text: str
+
+# Rest of your existing code remains the same...
+# [Keep all your existing functions and routes here]
+# [parse_quantity, extract_ingredients, convert_with_gemini, routes etc.]
+
+# Remove the duplicate app = FastAPI() at the bottom
 
 def parse_quantity(qty_str):
     try:
