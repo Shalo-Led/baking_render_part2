@@ -11,6 +11,21 @@ import uvicorn
 from dotenv import load_dotenv
 load_dotenv()  # Load environment variables before using them
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+origins = [
+    "https://shaloled.pythonanywhere.com",  # your frontend domain
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # or ["*"] for all (not recommended for production)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Enable asyncio in Jupyter
 
