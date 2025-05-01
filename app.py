@@ -13,7 +13,6 @@ load_dotenv()  # Load environment variables before using them
 
 
 # Enable asyncio in Jupyter
-nest_asyncio.apply()
 
 # Load environment variables (for Kaggle, use os.environ directly)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # Replace with your actual key
