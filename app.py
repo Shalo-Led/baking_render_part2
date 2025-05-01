@@ -6,9 +6,7 @@ import os
 import re
 from fractions import Fraction
 import json
-from pyngrok import ngrok
 import uvicorn
-import nest_asyncio
 # Add at the top of your imports
 from dotenv import load_dotenv
 load_dotenv()  # Load environment variables before using them
@@ -19,7 +17,7 @@ nest_asyncio.apply()
 
 # Load environment variables (for Kaggle, use os.environ directly)
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # Replace with your actual key
-ngrok.set_auth_token(os.getenv("NGROK_AUTH_TOKEN"))
+
 
 genai.configure(api_key=GEMINI_API_KEY)
 gemini = genai.GenerativeModel("gemini-2.0-flash")
@@ -142,6 +140,3 @@ async def convert_recipe(request: RecipeRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Start ngrok tunnel
-public_url = ngrok.connect(8000)
-print("Public URL:", public_url)
