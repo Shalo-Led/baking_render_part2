@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+python-multipart
+transformers
+google-generativeai
+pyngrok
+nest-asyncio
