@@ -5,3 +5,4 @@ transformers
 google-generativeai
 pyngrok
 nest-asyncio
+python-dotenv
